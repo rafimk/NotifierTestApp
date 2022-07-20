@@ -37,6 +37,7 @@ public class WeatherForecastController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> SendEmail([FromBody] EmailContract contract)
     {
+        contract.Html = HtmlBinder.Create("1", "2", "3", "4");
         await _emailService.Send(contract.To, contract.Subject, contract.Html);
         return Ok();
     }

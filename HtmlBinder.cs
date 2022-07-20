@@ -2,24 +2,20 @@ using Microsoft.AspNetCore;
 
 namespace NotifierTestApp
 {
-    public class HtmlBinder
+    public static class HtmlBinder
     {
-        public HtmlBinder()
-        {
-
-        }
-
-        public string Create()
+        public static string Create(string firstDigit, string secondDigit, string thirdDigit, string fourthDigit)
         {
             string body = string.Empty;
-            using (StreamReader reader = new StreamReader(Server.MapPath("~/sample.htm")))
+            var templatePath = Path.Combine("Templates\\", "otptemplate.html");
+            using (StreamReader reader = new StreamReader(templatePath))
             {
                 body = reader.ReadToEnd();
             }
-            body = body.Replace("{UserName}", "test");
-            body = body.Replace("{Title}", "test-title");
-            body = body.Replace("{Url}", "test-url");
-            body = body.Replace("{Description}", "description");
+            body = body.Replace("{firstDigit}", firstDigit);
+            body = body.Replace("{secondDigit}", secondDigit);
+            body = body.Replace("{thirdDigit}", thirdDigit);
+            body = body.Replace("{fourthDigit}", fourthDigit);
             return body;
         }
     }

@@ -15,15 +15,15 @@ public class EmailService : IEmailService
     {
         // create message
         var email = new MimeMessage();
-        email.From.Add(MailboxAddress.Parse(from ?? "test@outlook.com"));
+        email.From.Add(MailboxAddress.Parse(from ?? "muhammed.rafi@membership-app.me"));
         email.To.Add(MailboxAddress.Parse(to));
         email.Subject = subject;
         email.Body = new TextPart(TextFormat.Html) { Text = html };
 
         // send email
         using var smtp = new SmtpClient();
-        smtp.Connect("mail.outlook.com", 587, SecureSocketOptions.StartTls);
-        smtp.Authenticate("test@outlook.com", "sdfdsaf");
+        smtp.Connect("mail.privateemail.com", 465, SecureSocketOptions.SslOnConnect);
+        smtp.Authenticate("muhammed.rafi@membership-app.me", "Mem@4296326");
         await smtp.SendAsync(email);
         smtp.Disconnect(true);
     }
